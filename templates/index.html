@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static',filename='css/output.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='BOMB Logo - Circle.png')}}" rel="icon">
+    <title>BOMB Weather</title>
+</head>
+<body>
+    
+  <div class="grid grid-cols-2">
+    <div>
+    <h1 class="m-6 p-2 text-3xl">BOMB Weather - Beta</h1>
+    <h2 class="m-6 mt-24 p-2 text-2xl"><strong>B</strong>ob's <strong>O</strong>vercompensating <strong>M</strong>eteorological <strong>B</strong>ird</h2>
+    <h2 class="m-6 p-2 text-2xl">Location: <strong>Caringbah</strong></h2>
+    </div>
+    <div class="m-6 p-2 relative">
+        <img src="static/BOMB Logo - Background.jpeg" class="m-6 p-2 h-64 w-auto rounded-full inset-y-0 right-0 fixed">
+    </div>
+  </div>
+
+  <grid class="grid grid-cols-8 gap-2">
+    {% set day_names = ['Today\'sㅤㅤㅤWeather', 'Tomorrow\'s Weather', 'The Day After Tomorrow', '3 Days From Today', '4 Days From Today', '5 Days From Today', '6 Days Away From Today', 'A Week From Today'] %}
+    {% set count = namespace(value=0)%}
+    {% for day in weather['daily'] %}
+        <div class="m-6 p-2 w-[10vw] h-[52vh] border-2 border-blue-600">
+            <h2 class="text-2xl">{{ day_names[count.value] }}</h2>
+            <h3 class="text-xl">{{ day['weather'][0]['description']|title }}</h3>
+            <!-- <p>{{ day['weather'][0]['main']|title }}</p> -->
+            <img src="https://openweathermap.org/img/wn/{{day['weather'][0]['icon']}}@2x.png" class="border-2 border-gray-400 rounded-md bg-gray-400">
+            <p class="text-xl">Min: <strong>{{ day['temp']['min'] }}</strong>°C</p>
+            <p class="text-xl">Max: <strong>{{ day['temp']['max'] }}</strong>°C</p>
+            <p class="text-xl">Humidity: <strong>{{ day['humidity'] }}</strong>%</p>
+            <p class="text-xl">UV Index: <strong>{{ day['uvi'] }}</strong>/11</p>
+        </div>
+        {% set count.value = count.value + 1 %}
+    {% endfor %}
+
+  </grid>
+
+</body>
+</html>

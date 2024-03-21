@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static',filename='css/output.css')}}" rel="stylesheet">
+    <title>BOMB Weather</title>
+</head>
+<body>
+  <div>
+    <h1 class="text-3xl">BOMB Weather</h1>
+  </div>
+  <script>
+        function process()
+        {
+            var url = "/location/" + document.getElementById("zip").value + "/" + document.getElementById("country").value;
+            location.href = url;
+            return false;
+        }
+    </script>
+
+    <form onSubmit="return process();">
+        <label for="zip">Zip Code</label>
+        <input type="text" name="zip" id="zip">
+        <label for="country">Country Shortened, eg AU</label>
+        <input type="text" name="country" id="country">
+        <input type="submit" value="go">
+</form>
+</body>
+</html>
