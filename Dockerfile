@@ -2,7 +2,7 @@
 
 FROM python:3.11-slim-bullseye
 LABEL maintainer="jamesaglynn10@gmail.com"
-LABEL version="0.2"
+LABEL version="1.0"
 LABEL description="The docker image for BOMB, Bob's Overcompensating Meteorological Bird"
 
 ARG DEBIAN_FRONTEND=noninteractive
